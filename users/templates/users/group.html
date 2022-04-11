@@ -1,0 +1,44 @@
+{% extends 'main.html' %}
+{% block content %}
+
+
+<div class="container">
+
+
+
+  <div class="row mb-2">
+      {% for group in account.groups.all %}
+
+
+    <div class="col-md-6">
+        <a style="color: white;
+            text-decoration: None;
+
+        " href="{% url 'each_group' group.id %}">
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+
+            <h3 class="mb-0">{{group.name}}</h3>
+            <h6><div class="mb-1 text-muted">member: {{member}}</div></h6>
+
+
+        </div>
+
+        <div class="col-auto d-none d-lg-block">
+            <img src="{{group.group_profile.url}}" alt="" class="bd-placeholder-img" width="200" height="250">
+
+
+        </div>
+      </div>
+            </a>
+
+    </div>
+
+      {% endfor %}
+
+  </div>
+
+
+    </div>
+
+{% endblock content %}

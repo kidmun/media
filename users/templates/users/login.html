@@ -1,0 +1,63 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<style>
+
+     a:link {
+            text-decoration: None;
+
+        }
+</style>
+
+<div class="container">
+
+<div class="p-5 mb-4 bg-light rounded-3">
+      <div class="container-fluid py-5">
+
+
+<main class="form-signin">
+
+    <form action="" class="form auth__form" method="POST">
+            {% csrf_token %}
+          <!-- Input:Email -->
+          <div class="form__field">
+            <label for="formInput#text">Username: </label>
+            <input
+              class="form-control"
+              type="text"
+              name="username"
+              placeholder="Enter your username..."
+            />
+          </div>
+
+          <!-- Input:Password -->
+          <div class="form__field">
+            <label for="formInput#password">Password: </label>
+            <input
+              class="form-control"
+              type="password"
+              name="password"
+              placeholder="••••••••"
+            />
+          </div>
+        <br>
+          <div class="auth__actions">
+            <input class="btn-lg btn-primary" type="submit" value="Log In" />
+
+          </div>
+        <br>
+        <h5> you have no account ? <a href="{% url 'register' %}">SignUp</a></h5>
+        </form>
+
+      </div>
+    </div>
+
+
+</form>
+
+
+</main>
+          </div>
+ </div>
+    </div>
+{% endblock content %}

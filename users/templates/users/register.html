@@ -1,0 +1,49 @@
+{% extends 'main.html' %}
+{% block content %}
+<style>
+
+     a:link {
+            text-decoration: None;
+
+        }
+</style>
+
+
+
+
+<div class="container col-lg-5">
+  <div class="p-5 mb-4 bg-light rounded-3">
+      <div class="container-fluid py-5">
+  <main>
+    <div class="py-5 text-center">
+
+      <h2>Welcome to registration</h2>
+
+    </div>
+
+
+
+      <div class="col-md-7 col-lg-12">
+        <form class="needs-validation" novalidate method="post">
+          {% csrf_token %}
+            {% for field in form %}
+
+          <label for="">{{field.label}}</label>
+            <div class="form-floating">
+
+            {{field}}
+                {% for error in field.errors %}
+            <p style="color:red;">{{error}}</p>
+            {% endfor %}
+
+            </div>
+          {% endfor %}
+          <br>
+          <input type="submit" class="btn-lg btn-primary">
+           </form>
+        <h5>Already have an account ? <a href="{% url 'login' %}">Login</a></h5>
+      </div>
+ </div>
+    </div>
+</div>
+{% endblock content %}

@@ -9,11 +9,28 @@
     <title>Document</title>
     <link rel="stylesheet" href="{% static "css/bootstrap-5.0.2-dist/css/bootstrap.min.css" %}">
 </head>
-<body>
+<body style="background: #2c3e50;">
 {% include 'navbar.html'%}
+
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{message.tags}} alert-dismissible" id="message-box">
+
+<p class="alert__message" style="color: red;">{{message}}</p>
+</div>
+{% endfor %}
+<script>
+    var message_tag = document.getElementById("message-box")
+    setTimeout(function(){
+    message_tag.style.display="none";},3000);
+</script>
+{% endif %}
+
   {% block content %}
 {% endblock content %}
 
 </body>
 <script src="bootstrap-5.0.2-dist/css/bootstrap.min.css"></script>
+<script src="{% static 'js/main.js' %}"></script>
+
 </html>

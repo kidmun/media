@@ -1,0 +1,68 @@
+{% extends 'main.html' %}
+{% block content %}
+<style>
+  #me{
+  color: white;
+  }
+  #change{
+  color: white;
+  }
+
+</style>
+
+ <form id="searchForm" action="{% url 'projects' %}" method="get">
+
+          <input style="width:300px;" type="text" placeholder="Search projects" aria-label="Search" name="search_query" value="{{search_query}}">
+        </form>
+
+<div class="container">
+
+<h1 class="mb-0" id="change">Projects</h1>
+  <br>
+
+<div class="row mb-2">
+      {% for project in projects %}
+
+
+    <div class="col-md-6">
+
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+            {% if project.owner == request.user.account %}
+             <a href="{% url 'account' project.owner.id %}">
+          <strong class="d-inline-block mb-2 text-primary" >By {{project.owner}}</strong>
+                </a>
+            {% else %}
+            <a href="{% url 'user_account' project.owner.id %}">
+          <strong class="d-inline-block mb-2 text-primary" >By {{project.owner}}</strong>
+                </a>
+            {% endif %}
+              <a href="" id="me" style="text-decoration: None;">
+          <h3 class="mb-0">{{project.title}}</h3>
+          <div class="mb-1 text-muted" >{{project.created}}</div>
+          <p class="card-text mb-auto">{{project.description|slice:"150" }}</p>
+          <div class="mb-1 text-muted">total vote:{{project.vote_total}}</div>
+          <div class="mb-1 text-muted">positive feedback {{project.vote_ratio}}%</div>
+                   </a>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+            <img src="{{project.project_profile.url}}" alt="" class="bd-placeholder-img" width="200" height="250">
+
+
+        </div>
+      </div>
+
+    </div>
+
+
+      {% endfor %}
+
+
+    </div>
+
+
+
+
+    </div>
+  {% include 'pagination.html' with query_set=projects custom_range=custom_range %}
+{% endblock content %}
