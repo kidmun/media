@@ -109,17 +109,13 @@ def editProject(request,pk):
 
 
 def groupPage(request):
-    account=request.user.account
-    groups=account.groups.all()
+    account = request.user.account
+    users_number = []
+    for group in account.groups.all():
+        users_number.append(len(group.users.all()))
 
-    co=[]
-    new_co=[]
-    for group in groups:
-        people = group.users.all()
-        for person in people:
-            co.append(person)
-        new_co.append(len(co))
-    content={"account":account,"new_co":new_co}
+
+    content={"account":account,"users_number":users_number}
     return render(request,"users/group.html",content)
 def eachGroup(request,pk):
     group=Group.objects.get(id=pk)
@@ -144,15 +140,6 @@ def eachGroup(request,pk):
 def userAccount(request,pk):
     account = Account.objects.get(id=pk)
     form = AccountForm()
-
-
-
-    added_followers = []
-    added_followed = []
-    added_followers_new = []
-    added_followed_new = []
-
-
     if request.method == "POST":
         if account in request.user.account.followed_accounts.all():
             account.follower_accounts.remove(request.user.account)

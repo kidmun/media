@@ -10,6 +10,7 @@
       {% for group in account.groups.all %}
 
 
+
     <div class="col-md-6">
         <a style="color: white;
             text-decoration: None;
@@ -19,7 +20,7 @@
         <div class="col p-4 d-flex flex-column position-static">
 
             <h3 class="mb-0">{{group.name}}</h3>
-            <h6><div class="mb-1 text-muted">member: {{member}}</div></h6>
+            <h6><div class="mb-1 text-muted">member: {{group.users.all | length}}</div></h6>
 
 
         </div>
@@ -33,6 +34,7 @@
             </a>
 
     </div>
+
 
       {% endfor %}
 
