@@ -50,7 +50,8 @@ def registerPage(request):
 
 def front(request):
     posts, search_query = search_posts(request)
-    content={"posts":posts}
+    posts, custom_range = pagination(request, posts, 1)
+    content={"posts":posts,"custom_range":custom_range,"search_query":search_query}
     return render(request,"users/front.html",content)
 
 @login_required(login_url="login")

@@ -70,7 +70,6 @@ def pagination(request,accounts,result):
 
 def search_posts(request):
     search_query = ''
-    accounts = []
     if request.GET.get('search_query'):
         search_query = request.GET.get('search_query')
         accounts = Account.objects.filter(Q(username__icontains=search_query) | Q(first_name__icontains=search_query) | Q(last_name__icontains=search_query))

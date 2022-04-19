@@ -50,6 +50,7 @@
          </div>
         <hr>
 {% endfor %}
+    {% include 'pagination.html' with query_set=posts custom_range=custom_range %}
 
 </div>
 {% endblock content %}
