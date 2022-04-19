@@ -1,5 +1,8 @@
 {% extends 'main.html' %}
 {% block content %}
+ <form  id="searchForm" action="{% url 'front' %}" method="get">
+          <input style="width:300px;" type="text" placeholder="Search users" aria-label="Search" name="search_query" value="{{search_query}}">
+        </form>
 <div class="container mt-3 mb-4" >
 
 {% for post in posts %}

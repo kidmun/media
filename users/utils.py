@@ -1,6 +1,7 @@
 from django.db.models import Q
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from .models import Account,Project
+from actions.models import UserPost
 def search_users(request):
     search_query = ''
     if request.GET.get('search_query'):
@@ -65,5 +66,15 @@ def pagination(request,accounts,result):
 
     custom_range = range(left_index, right_index)
     return accounts,custom_range
+
+
+def search_posts(request):
+    search_query = ''
+    accounts = []
+    if request.GET.get('search_query'):
+        search_query = request.GET.get('search_query')
+        accounts = Account.objects.filter(Q(username__icontains=search_query) | Q(first_name__icontains=search_query) | Q(last_name__icontains=search_query))
+    posts = UserPost.objects.filter(Q(body__icontains=search_query) | Q(owner__in=accounts))
+    return posts,search_query
 
 

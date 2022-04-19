@@ -5,7 +5,7 @@ from django.contrib.auth import login,authenticate,logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import RegisterForm,AccountForm,GroupMessageForm,ProjectCreationForm,FollowForm
-from .utils import search_users,search_projects,search_contacts,search_followers,search_following,pagination
+from .utils import search_users,search_projects,search_contacts,search_followers,search_following,pagination,search_posts
 from actions.models import UserPost
 
 def loginPage(request):
@@ -49,8 +49,7 @@ def registerPage(request):
     return render(request,"users/register.html",content)
 
 def front(request):
-    posts = UserPost.objects.all()
-
+    posts, search_query = search_posts(request)
     content={"posts":posts}
     return render(request,"users/front.html",content)
 
