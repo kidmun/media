@@ -30,5 +30,14 @@ class GroupMessage(models.Model):
         ordering = ['is_read', 'created']
 
 
+class UserPost(models.Model):
+    owner = models.ForeignKey(Account,on_delete=models.SET_NULL, null=True, blank=True)
+    body = models.CharField(max_length=1000, null=True, blank=True)
+    post_image = models.ImageField(null=True,blank=True,upload_to="post_images/",default='post_images/default.jpg')
+    created = models.DateTimeField(auto_now_add=True)
+    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+
+    def __str__(self):
+        return self.body
 
 # Create your models here.

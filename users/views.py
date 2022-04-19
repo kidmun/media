@@ -5,7 +5,8 @@ from django.contrib.auth import login,authenticate,logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import RegisterForm,AccountForm,GroupMessageForm,ProjectCreationForm,FollowForm
-from .utils import search_users,search_projects,search_contacts,search_followers,search_following,pagination
+from .utils import search_users,search_projects,search_contacts,search_followers,search_following,pagination,search_posts
+from actions.models import UserPost
 
 def loginPage(request):
     if request.method=="POST":
@@ -48,8 +49,9 @@ def registerPage(request):
     return render(request,"users/register.html",content)
 
 def front(request):
-
-    content={}
+    posts, search_query = search_posts(request)
+    posts, custom_range = pagination(request, posts, 1)
+    content={"posts":posts,"custom_range":custom_range,"search_query":search_query}
     return render(request,"users/front.html",content)
 
 @login_required(login_url="login")
