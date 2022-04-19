@@ -1,6 +1,52 @@
 {% extends 'main.html' %}
 {% block content %}
+<div class="container mt-3 mb-4" >
+
+{% for post in posts %}
+    <div class="col-md-8">
+        <div class="user-dashboard-info-box table-responsive mb-0 bg-white p-4 shadow-sm">
+
+
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+            {% if post.owner == request.user.account %}
+             <a href="{% url 'account' post.owner.id %}">
+          <strong class="d-inline-block mb-2 text-primary" >By {{post.owner}}</strong>
+                </a>
+            {% else %}
+            <a href="{% url 'user_account' post.owner.id %}">
+          <strong class="d-inline-block mb-2 text-primary" >By {{post.owner}}</strong>
+                </a>
+            {% endif %}
+              <a href="" id="me" style="text-decoration: None;">
+
+
+          <p class="card-text mb-auto" style="color: black;"><stron>{{post.body|slice:"150" }}</stron></p>
+                   </a>
+
+                  <br>
+                  <br>
+
+                  <div class="mb-1 text-muted"> <a href="">like:{{post.vote_total}}</a> <a href="">comments: {{post.vote_ratio}}</a></div>
+
+                   <div class="mb-1 text-muted" >{{post.created}}</div>
+
+        </div>
+        <div class="col-auto d-none d-lg-block">
+            <img src="{{post.post_image.url}}" alt="" class="bd-placeholder-img" width="300" height="250">
+
+
+        </div>
+      </div>
 
 
 
+
+
+</div>
+         </div>
+        <hr>
+{% endfor %}
+
+</div>
 {% endblock content %}
